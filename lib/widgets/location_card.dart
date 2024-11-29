@@ -14,14 +14,12 @@ class LocationCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppConstants.cardRadius), // Rounded corners for the card
         child: Stack(
           children: [
-            // Background Image
             Image.network(
               location['imageUrl']!,
               width: 110,
               height: 150,
               fit: BoxFit.cover,
             ),
-            // Location Name Text
             Positioned(
               bottom: 0,
               left: 0,
