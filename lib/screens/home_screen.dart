@@ -19,7 +19,6 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header and Search Section
               Container(
                 padding: const EdgeInsets.all(AppConstants.defaultPadding),
                 decoration: BoxDecoration(
@@ -94,7 +93,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              // Popular Locations Section
               Text(
                 AppConstants.popularLocationsText,
                 style: AppConstants.subHeadingTextStyle,
@@ -111,7 +109,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              // Recommended Section
               Text(
                 AppConstants.recommendedText,
                 style: AppConstants.subHeadingTextStyle,
@@ -133,10 +130,10 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              // Ads Section (below Recommended)
+
               const AdsSection(),
               const SizedBox(height: 24),
-              // Most Viewed Section
+
               const MostViewedSection(),
             ],
           ),

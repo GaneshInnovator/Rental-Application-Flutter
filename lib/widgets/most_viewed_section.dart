@@ -69,9 +69,8 @@ class MostViewedSection extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            // Adding the yellow polygon here next to the rating
                             CustomPaint(
-                              size: Size(8, 8), // Size of the polygon
+                              size: Size(8, 8),
                               painter: PolygonPainter(),
                             ),
                             const Spacer(),
@@ -118,16 +117,15 @@ class MostViewedSection extends StatelessWidget {
   }
 }
 
-// PolygonPainter class to draw the polygon shape
 class PolygonPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()
-      ..color = Colors.yellow // Set the polygon color to yellow
+      ..color = Colors.yellow
       ..style = PaintingStyle.fill;
 
     final Path path = Path()
-      ..moveTo(size.width * 0.25, size.height * -1) // Starting point
+      ..moveTo(size.width * 0.25, size.height * -1)
       ..lineTo(size.width * 0, size.height * -0.25)
       ..lineTo(size.width * 0.5, size.height * 0)
       ..lineTo(size.width * -0.25, size.height * 1)

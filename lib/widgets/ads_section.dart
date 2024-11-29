@@ -10,15 +10,14 @@ class AdsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (var ad in adsImages) // Loop through adsImages
+        for (var ad in adsImages)
           Padding(
-            padding: const EdgeInsets.only(bottom: AppConstants.spacingBetweenElements), // Spacing between ads
+            padding: const EdgeInsets.only(bottom: AppConstants.spacingBetweenElements),
             child: Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppConstants.cardRadius),
                 child: Stack(
                   children: [
-                    // Ad image with adjusted width (70%) and centered
                     Image.network(
                       ad['imageUrl']!,
                       height: 220,

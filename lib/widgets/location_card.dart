@@ -17,13 +17,13 @@ class LocationCard extends StatelessWidget {
             // Background Image
             Image.network(
               location['imageUrl']!,
-              width: 110, // Adjust size as needed
-              height: 150, // Adjust size as needed
-              fit: BoxFit.cover, // Ensures the image zooms and fills the container
+              width: 110,
+              height: 150,
+              fit: BoxFit.cover,
             ),
             // Location Name Text
             Positioned(
-              bottom: 0, // Align text at the bottom
+              bottom: 0,
               left: 0,
               right: 0,
               child: Container(

@@ -9,8 +9,8 @@ class RecommendedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: AppDimensions.recommendedCardWidth, // Use constant width
-      margin: const EdgeInsets.only(right: AppDimensions.spacingMedium), // Spacing between cards
+      width: AppDimensions.recommendedCardWidth,
+      margin: const EdgeInsets.only(right: AppDimensions.spacingMedium),
       decoration: BoxDecoration(
         color: AppColors.cardBackgroundColor,
         borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
@@ -20,7 +20,6 @@ class RecommendedCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Image Section
               ClipRRect(
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(AppDimensions.borderRadiusMedium),
@@ -32,13 +31,11 @@ class RecommendedCard extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              // Info Section below the image
               Padding(
                 padding: const EdgeInsets.all(AppDimensions.spacingSmall),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Price Section
                     Row(
                       children: [
                         Text(
@@ -57,16 +54,14 @@ class RecommendedCard extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        // Add the polygon here next to the "day" text
                         const SizedBox(width: 8),
                         CustomPaint(
-                          size: Size(8, 8), // Size of the polygon
+                          size: Size(8, 8),
                           painter: PolygonPainter(),
                         ),
                       ],
                     ),
                     const SizedBox(height: AppDimensions.spacingExtraSmall),
-                    // Title
                     Text(
                       place['title']!,
                       maxLines: 1,
@@ -90,7 +85,6 @@ class RecommendedCard extends StatelessWidget {
               ),
             ],
           ),
-          // Rating Section
           Positioned(
             top: AppDimensions.recommendedCardImageHeight + 10,
             right: AppDimensions.spacingSmall,
@@ -104,7 +98,6 @@ class RecommendedCard extends StatelessWidget {
               ],
             ),
           ),
-          // Favorite Icon
           Positioned(
             top: AppDimensions.spacingSmall,
             right: AppDimensions.spacingSmall,
@@ -126,16 +119,15 @@ class RecommendedCard extends StatelessWidget {
   }
 }
 
-// PolygonPainter class to draw the polygon shape
 class PolygonPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()
-      ..color = Colors.yellow // Set the polygon color to yellow
+      ..color = Colors.yellow
       ..style = PaintingStyle.fill;
 
     final Path path = Path()
-      ..moveTo(size.width * 0.25, size.height * -1) // Starting point
+      ..moveTo(size.width * 0.25, size.height * -1)
       ..lineTo(size.width * 0, size.height * -0.25)
       ..lineTo(size.width * 0.5, size.height * 0)
       ..lineTo(size.width * -0.25, size.height * 1)
