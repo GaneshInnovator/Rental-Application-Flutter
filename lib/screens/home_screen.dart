@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 import '../widgets/location_card.dart';
 import '../widgets/recommended_card.dart';
+import '../widgets/ads_section.dart';
+import '../widgets/most_viewed_section.dart';
+import '../utils/Appsconstants.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,48 +12,36 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Light gray background for overall content
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(AppConstants.defaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Boxed Header and Search Section
+              // Header and Search Section
               Container(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(AppConstants.defaultPadding),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF8F7FD), // Box background color
-                  borderRadius: BorderRadius.circular(12), // Rounded corners
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1), // Shadow color
-                      blurRadius: 15,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
+                  color: AppConstants.headerBackgroundColor,
+                  borderRadius: BorderRadius.circular(AppConstants.cardRadius),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Header Text
-                    const Text(
-                      "Explore the world! By Travelling",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Text(
+                      AppConstants.exploreText,
+                      style: AppConstants.headerTextStyle,
                     ),
                     const SizedBox(height: 20),
-                    // Search Bar
                     Row(
                       children: [
                         Expanded(
                           child: Container(
-                            height: 50,
+                            height: AppConstants.searchHeight,
                             decoration: BoxDecoration(
-                              color: Colors.white, // White background for the search bar
-                              borderRadius: BorderRadius.circular(12),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(AppConstants.cardRadius),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.1),
@@ -68,9 +59,8 @@ class HomeScreen extends StatelessWidget {
                                   child: TextField(
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintText: "Where did you go?",
-                                      hintStyle:
-                                      TextStyle(color: Colors.grey.shade400),
+                                      hintText: AppConstants.searchHintText,
+                                      hintStyle: TextStyle(color: Colors.grey.shade400),
                                     ),
                                   ),
                                 ),
@@ -79,13 +69,12 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        // Filter Button
                         Container(
-                          height: 50,
-                          width: 50,
+                          height: AppConstants.searchHeight,
+                          width: AppConstants.searchHeight,
                           decoration: BoxDecoration(
-                            color: Colors.white, // White background for filter button
-                            borderRadius: BorderRadius.circular(12),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(AppConstants.cardRadius),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.1),
@@ -106,13 +95,13 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               // Popular Locations Section
-              const Text(
-                "Popular locations",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Text(
+                AppConstants.popularLocationsText,
+                style: AppConstants.subHeadingTextStyle,
               ),
               const SizedBox(height: 16),
               SizedBox(
-                height: 120,
+                height: 140,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: popularLocations.length,
@@ -122,20 +111,20 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              // Recommended Section (now horizontal)
-              const Text(
-                "Recommended",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              // Recommended Section
+              Text(
+                AppConstants.recommendedText,
+                style: AppConstants.subHeadingTextStyle,
               ),
               const SizedBox(height: 16),
               SizedBox(
-                height: 250, // Adjusted height for the cards
+                height: 250,
                 child: ListView.builder(
-                  scrollDirection: Axis.horizontal, // Horizontal scroll
+                  scrollDirection: Axis.horizontal,
                   itemCount: recommendedPlaces.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
+                      padding: const EdgeInsets.only(right: AppConstants.spacingBetweenElements),
                       child: RecommendedCard(
                         place: recommendedPlaces[index],
                       ),
@@ -143,6 +132,12 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
               ),
+              const SizedBox(height: 24),
+              // Ads Section (below Recommended)
+              const AdsSection(),
+              const SizedBox(height: 24),
+              // Most Viewed Section
+              const MostViewedSection(),
             ],
           ),
         ),

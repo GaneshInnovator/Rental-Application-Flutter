@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/AppsConstants.dart';
 
 class RecommendedCard extends StatelessWidget {
   final Map<String, dynamic> place;
@@ -8,12 +9,11 @@ class RecommendedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 250, // Set a fixed width for the card
-      margin: const EdgeInsets.only(right: 16), // Add spacing between cards
+      width: AppDimensions.recommendedCardWidth, // Use constant width
+      margin: const EdgeInsets.only(right: AppDimensions.spacingMedium), // Spacing between cards
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        // Removed boxShadow to remove the shadow effect
+        color: AppColors.cardBackgroundColor,
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
       ),
       child: Stack(
         children: [
@@ -22,48 +22,66 @@ class RecommendedCard extends StatelessWidget {
             children: [
               // Image Section
               ClipRRect(
-                borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(12)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(AppDimensions.borderRadiusMedium),
+                ),
                 child: Image.network(
                   place['imageUrl']!,
-                  height: 150,
+                  height: AppDimensions.recommendedCardImageHeight,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
-              // Info Section
+              // Info Section below the image
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(AppDimensions.spacingSmall),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Price
-                    Text(
-                      "${place['price']} / Night",
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    // Rating
+                    // Price Section
                     Row(
                       children: [
-                        const Icon(Icons.star, color: Colors.amber, size: 16),
                         Text(
-                          " ${place['rating']}",
-                          style: const TextStyle(fontSize: 14),
+                          place['price'],
+                          style: TextStyle(
+                            fontSize: AppDimensions.textLarge,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textPrimaryColor,
+                          ),
+                        ),
+                        const SizedBox(width: AppDimensions.spacingExtraSmall),
+                        Text(
+                          "/ ${place['day']}",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                          ),
+                        ),
+                        // Add the polygon here next to the "day" text
+                        const SizedBox(width: 8),
+                        CustomPaint(
+                          size: Size(8, 8), // Size of the polygon
+                          painter: PolygonPainter(),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: AppDimensions.spacingExtraSmall),
                     // Title
                     Text(
                       place['title']!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: AppDimensions.textMedium,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Text(
+                      place['detail']!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 12,
                         color: Colors.grey[600],
                       ),
                     ),
@@ -72,25 +90,64 @@ class RecommendedCard extends StatelessWidget {
               ),
             ],
           ),
-          // Favorite Icon (Heart) in Top-Right Corner
+          // Rating Section
           Positioned(
-            top: 8,
-            right: 8,
+            top: AppDimensions.recommendedCardImageHeight + 10,
+            right: AppDimensions.spacingSmall,
+            child: Row(
+              children: [
+                const Icon(Icons.star, color: Colors.redAccent, size: 14),
+                Text(
+                  " ${place['rating']}",
+                  style: TextStyle(fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+          // Favorite Icon
+          Positioned(
+            top: AppDimensions.spacingSmall,
+            right: AppDimensions.spacingSmall,
             child: Container(
-              padding: const EdgeInsets.all(6),
+              padding: const EdgeInsets.all(AppDimensions.spacingExtraSmall),
               decoration: BoxDecoration(
-                color: Colors.white, // Background for visibility
+                color: AppColors.iconBackgroundColor,
                 shape: BoxShape.circle,
-                // Removed shadow here as well
               ),
               child: const Icon(
                 Icons.favorite_border,
-                color: Colors.red,
+                color: AppColors.iconColor,
               ),
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+// PolygonPainter class to draw the polygon shape
+class PolygonPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()
+      ..color = Colors.yellow // Set the polygon color to yellow
+      ..style = PaintingStyle.fill;
+
+    final Path path = Path()
+      ..moveTo(size.width * 0.25, size.height * -1) // Starting point
+      ..lineTo(size.width * 0, size.height * -0.25)
+      ..lineTo(size.width * 0.5, size.height * 0)
+      ..lineTo(size.width * -0.25, size.height * 1)
+      ..lineTo(size.width * 0, size.height * 0.25)
+      ..lineTo(size.width * -0.5, size.height * 0)
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }
