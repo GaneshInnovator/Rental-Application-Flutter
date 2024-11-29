@@ -15,7 +15,6 @@ class MostViewedSection extends StatelessWidget {
           style: AppConstants.subHeadingTextStyle,
         ),
         const SizedBox(height: 16),
-        // Displaying most viewed places dynamically
         for (var place in viwedPlaces)
           Padding(
             padding: const EdgeInsets.only(bottom: AppConstants.spacingBetweenElements), // Space between items
@@ -86,7 +85,6 @@ class MostViewedSection extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 5),
-                        // Title
                         Text(
                           place['title']!,
                           maxLines: 1,
