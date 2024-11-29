@@ -1,6 +1,6 @@
-# rendingapp1
+# Rental App
 
-A new Flutter project.
+Rental application UI design.
 
 ## Getting Started
 
