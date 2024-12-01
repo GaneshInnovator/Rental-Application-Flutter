@@ -24,11 +24,12 @@ class RecommendedCard extends StatelessWidget {
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(AppDimensions.borderRadiusMedium),
                 ),
-                child: Image.network(
-                  place['imageUrl']!,
+                child: CachedNetworkImage(
+                  imageUrl: place['imageUrl']!,
                   height: AppDimensions.recommendedCardImageHeight,
                   width: double.infinity,
                   fit: BoxFit.cover,
+                  placeholder: (context, url) => CircularProgressIndicator(),errorWidget:  (context, url, error) => Icon(Icons.error),
                 ),
               ),
               Padding(
