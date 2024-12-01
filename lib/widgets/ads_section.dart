@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 import '../utils/AppsConstants.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class AdsSection extends StatelessWidget {
   const AdsSection({Key? key}) : super(key: key);
@@ -18,11 +19,12 @@ class AdsSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(AppConstants.cardRadius),
                 child: Stack(
                   children: [
-                    Image.network(
-                      ad['imageUrl']!,
+                    CachedNetworkImage(
+                      imageUrl: ad['imageUrl']!,
                       height: 220,
-                      width: MediaQuery.of(context).size.width * 0.8, // 70% of screen width
+                      width: MediaQuery.of(context).size.width * 0.8,
                       fit: BoxFit.cover,
+                      placeholder: (context, url) => CircularProgressIndicator(),errorWidget:  (context, url, error) => Icon(Icons.error),
                     ),
                     Positioned(
                       left: 16,
