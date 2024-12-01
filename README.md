@@ -2,6 +2,8 @@
 
 Rental application UI design.
 
+![Screenshot_20241201_174430](https://github.com/user-attachments/assets/e7bc5dee-266a-4399-af7f-a8599a3d561e)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
