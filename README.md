@@ -2,7 +2,11 @@
 
 Rental application UI design.
 
+## Outputs
+
 ![Screenshot_20241201_174430](https://github.com/user-attachments/assets/e7bc5dee-266a-4399-af7f-a8599a3d561e)
+
+![Screenshot_20241201_175322](https://github.com/user-attachments/assets/5a280142-42ab-4ca5-9674-255361fd44c2)
 
 ## Getting Started
 
