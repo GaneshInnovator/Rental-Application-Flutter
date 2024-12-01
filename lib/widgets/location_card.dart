@@ -12,7 +12,7 @@ class LocationCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: AppConstants.spacingBetweenElements),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppConstants.cardRadius), // Rounded corners for the card
+        borderRadius: BorderRadius.circular(AppConstants.cardRadius),
         child: Stack(
           children: [
 
