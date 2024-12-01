@@ -25,11 +25,12 @@ class MostViewedSection extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      Image.network(
-                        place['imageUrl']!,
+                      CachedNetworkImage(
+                        imageUrl: place['imageUrl']!,
                         height: 200,
                         width: double.infinity,
                         fit: BoxFit.cover,
+                        placeholder: (context, url) => CircularProgressIndicator(),errorWidget:  (context, url, error) => Icon(Icons.error),
                       ),
                       Positioned(
                         top: 10,
