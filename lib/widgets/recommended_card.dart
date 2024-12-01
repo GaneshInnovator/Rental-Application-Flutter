@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/AppsConstants.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class RecommendedCard extends StatelessWidget {
   final Map<String, dynamic> place;
