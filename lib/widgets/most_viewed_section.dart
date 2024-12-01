@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 import '../utils/AppsConstants.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class MostViewedSection extends StatelessWidget {
   const MostViewedSection({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class MostViewedSection extends StatelessWidget {
         const SizedBox(height: 16),
         for (var place in viwedPlaces)
           Padding(
-            padding: const EdgeInsets.only(bottom: AppConstants.spacingBetweenElements), // Space between items
+            padding: const EdgeInsets.only(bottom: AppConstants.spacingBetweenElements), 
             child: ClipRRect(
               borderRadius: BorderRadius.circular(AppConstants.cardRadius),
               child: Column(
