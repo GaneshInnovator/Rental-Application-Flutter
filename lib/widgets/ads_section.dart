@@ -8,31 +8,35 @@ class AdsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (var ad in adsImages)
           Padding(
-            padding: const EdgeInsets.only(bottom: AppConstants.spacingBetweenElements),
+            padding: EdgeInsets.only(bottom: screenHeight * 0.02),
             child: Center(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+                borderRadius: BorderRadius.circular(screenWidth * 0.03),
                 child: Stack(
                   children: [
                     CachedNetworkImage(
                       imageUrl: ad['imageUrl']!,
-                      height: 220,
-                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: screenHeight * 0.38,
+                      width: double.infinity,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) => CircularProgressIndicator(),errorWidget:  (context, url, error) => Icon(Icons.error),
+                      placeholder: (context, url) => const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
                     ),
                     Positioned(
-                      left: 16,
-                      top: 16,
+                      left: screenWidth * 0.04,
+                      top: screenHeight * 0.02,
                       child: Text(
                         AppConstants.hostingFeeText,
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: screenWidth * 0.045,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           shadows: [
@@ -46,17 +50,23 @@ class AdsSection extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: 16,
-                      top: 50,
+                      left: screenWidth * 0.04,
+                      top: screenHeight * 0.06,
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.redAccent,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(screenWidth * 0.05),
                           ),
                         ),
-                        child: const Text(AppConstants.becomeHostButtonText, style: TextStyle(color: Colors.white),),
+                        child: Text(
+                          AppConstants.becomeHostButtonText,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: screenWidth * 0.04,
+                          ),
+                        ),
                       ),
                     ),
                   ],
