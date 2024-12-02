@@ -9,34 +9,36 @@ class LocationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Padding(
-      padding: const EdgeInsets.only(right: AppConstants.spacingBetweenElements),
+      padding: EdgeInsets.only(right: screenWidth * 0.04),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+        borderRadius: BorderRadius.circular(screenWidth * 0.03),
         child: Stack(
           children: [
-
             CachedNetworkImage(
               imageUrl: location['imageUrl']!,
-              width: 110,
-              height: 150,
+              width: screenWidth * 0.3,
+              height: screenHeight * 0.2,
               fit: BoxFit.cover,
-              placeholder: (context, url) => CircularProgressIndicator(),errorWidget:  (context, url, error) => Icon(Icons.error),
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
-
             Positioned(
               bottom: 0,
               left: 0,
               right: 0,
               child: Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 6),
+                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.007),
                 color: Colors.transparent,
                 child: Text(
                   location['name']!,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 12,
+                    fontSize: screenWidth * 0.03,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
