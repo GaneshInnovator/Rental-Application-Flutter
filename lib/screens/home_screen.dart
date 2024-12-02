@@ -11,19 +11,23 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppConstants.defaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.all(AppConstants.defaultPadding),
+                padding: EdgeInsets.symmetric(
+                  vertical: screenHeight * 0.02,
+                  horizontal: screenWidth * 0.05,
+                ),
                 decoration: BoxDecoration(
                   color: AppConstants.headerBackgroundColor,
-                  borderRadius: BorderRadius.circular(AppConstants.cardRadius),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,15 +36,15 @@ class HomeScreen extends StatelessWidget {
                       AppConstants.exploreText,
                       style: AppConstants.headerTextStyle,
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: screenHeight * 0.02),
                     Row(
                       children: [
                         Expanded(
                           child: Container(
-                            height: AppConstants.searchHeight,
+                            height: screenHeight * 0.06,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+                              borderRadius: BorderRadius.circular(screenWidth * 0.05),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.1),
@@ -51,15 +55,15 @@ class HomeScreen extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                const SizedBox(width: 16),
-                                const Icon(Icons.search, color: Colors.grey),
-                                const SizedBox(width: 10),
+                                SizedBox(width: screenWidth * 0.04),
+                                const Icon(Icons.search, color: Colors.black87),
+                                SizedBox(width: screenWidth * 0.025),
                                 Expanded(
                                   child: TextField(
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: AppConstants.searchHintText,
-                                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                                      hintStyle: TextStyle(color: Colors.black87),
                                     ),
                                   ),
                                 ),
@@ -67,13 +71,13 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        SizedBox(width: screenWidth * 0.025),
                         Container(
-                          height: AppConstants.searchHeight,
-                          width: AppConstants.searchHeight,
+                          height: screenHeight * 0.06,
+                          width: screenHeight * 0.06,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(AppConstants.cardRadius),
+                            borderRadius: BorderRadius.circular(screenWidth * 0.05),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.1),
@@ -84,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: const Icon(
                             Icons.tune,
-                            color: Colors.grey,
+                            color: Colors.black87,
                           ),
                         ),
                       ],
@@ -92,49 +96,63 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
-              Text(
-                AppConstants.popularLocationsText,
-                style: AppConstants.subHeadingTextStyle,
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                height: 140,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: popularLocations.length,
-                  itemBuilder: (context, index) {
-                    return LocationCard(location: popularLocations[index]);
-                  },
-                ),
-              ),
-              const SizedBox(height: 24),
-              Text(
-                AppConstants.recommendedText,
-                style: AppConstants.subHeadingTextStyle,
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                height: 250,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: recommendedPlaces.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: AppConstants.spacingBetweenElements),
-                      child: RecommendedCard(
-                        place: recommendedPlaces[index],
+              Padding(
+                padding: EdgeInsets.all(screenWidth * 0.05),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: screenHeight * 0.02),
+                    Text(
+                      AppConstants.popularLocationsText,
+                      style: AppConstants.subHeadingTextStyle,
+                    ),
+                    SizedBox(height: screenHeight * 0.02),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
+                      child: SizedBox(
+                        height: screenHeight * 0.18,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: popularLocations.length,
+                          itemBuilder: (context, index) {
+                            return LocationCard(location: popularLocations[index]);
+                          },
+                        ),
                       ),
-                    );
-                  },
+                    ),
+                    SizedBox(height: screenHeight * 0.03),
+                    Text(
+                      AppConstants.recommendedText,
+                      style: AppConstants.subHeadingTextStyle,
+                    ),
+                    SizedBox(height: screenHeight * 0.02),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
+                      child: SizedBox(
+                        height: screenHeight * 0.3,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: recommendedPlaces.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.only(right: screenWidth * 0.04),
+                              child: RecommendedCard(
+                                place: recommendedPlaces[index],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: screenHeight * 0.03),
+
+                    const AdsSection(),
+                    SizedBox(height: screenHeight * 0.03),
+
+                    const MostViewedSection(),
+                  ],
                 ),
               ),
-              const SizedBox(height: 24),
-
-              const AdsSection(),
-              const SizedBox(height: 24),
-
-              const MostViewedSection(),
             ],
           ),
         ),
