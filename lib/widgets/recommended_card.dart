@@ -9,12 +9,15 @@ class RecommendedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      width: AppDimensions.recommendedCardWidth,
-      margin: const EdgeInsets.only(right: AppDimensions.spacingMedium),
+      width: screenWidth * 0.6,
+      margin: EdgeInsets.only(right: screenWidth * 0.03),
       decoration: BoxDecoration(
         color: AppColors.cardBackgroundColor,
-        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
+        borderRadius: BorderRadius.circular(screenWidth * 0.03),
       ),
       child: Stack(
         children: [
@@ -22,19 +25,21 @@ class RecommendedCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(AppDimensions.borderRadiusMedium),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(screenWidth * 0.03),
+                  bottom: Radius.circular(screenWidth * 0.03),
                 ),
                 child: CachedNetworkImage(
                   imageUrl: place['imageUrl']!,
-                  height: AppDimensions.recommendedCardImageHeight,
+                  height: screenHeight * 0.2,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => CircularProgressIndicator(),errorWidget:  (context, url, error) => Icon(Icons.error),
+                  placeholder: (context, url) => const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(AppDimensions.spacingSmall),
+                padding: EdgeInsets.all(screenWidth * 0.02),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -43,33 +48,33 @@ class RecommendedCard extends StatelessWidget {
                         Text(
                           place['price'],
                           style: TextStyle(
-                            fontSize: AppDimensions.textLarge,
+                            fontSize: screenWidth * 0.045,
                             fontWeight: FontWeight.bold,
                             color: AppColors.textPrimaryColor,
                           ),
                         ),
-                        const SizedBox(width: AppDimensions.spacingExtraSmall),
+                        SizedBox(width: screenWidth * 0.01),
                         Text(
                           "/ ${place['day']}",
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: screenWidth * 0.03,
                             color: Colors.black,
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: screenWidth * 0.02),
                         CustomPaint(
-                          size: Size(8, 8),
+                          size: Size(screenWidth * 0.02, screenHeight * 0.01),
                           painter: PolygonPainter(),
                         ),
                       ],
                     ),
-                    const SizedBox(height: AppDimensions.spacingExtraSmall),
+                    SizedBox(height: screenHeight * 0.005),
                     Text(
                       place['title']!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: AppDimensions.textMedium,
+                        fontSize: screenWidth * 0.035,
                         color: Colors.black,
                       ),
                     ),
@@ -78,7 +83,7 @@ class RecommendedCard extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: screenWidth * 0.03,
                         color: Colors.grey[600],
                       ),
                     ),
@@ -88,30 +93,31 @@ class RecommendedCard extends StatelessWidget {
             ],
           ),
           Positioned(
-            top: AppDimensions.recommendedCardImageHeight + 10,
-            right: AppDimensions.spacingSmall,
+            top: screenHeight * 0.2 + 10,
+            right: screenWidth * 0.03,
             child: Row(
               children: [
-                const Icon(Icons.star, color: Colors.redAccent, size: 14),
+                Icon(Icons.star, color: Colors.redAccent, size: screenWidth * 0.035),
                 Text(
                   " ${place['rating']}",
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: screenWidth * 0.03),
                 ),
               ],
             ),
           ),
           Positioned(
-            top: AppDimensions.spacingSmall,
-            right: AppDimensions.spacingSmall,
+            top: screenWidth * 0.03,
+            right: screenWidth * 0.03,
             child: Container(
-              padding: const EdgeInsets.all(AppDimensions.spacingExtraSmall),
+              padding: EdgeInsets.all(screenWidth * 0.01),
               decoration: BoxDecoration(
                 color: AppColors.iconBackgroundColor,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.favorite_border,
                 color: AppColors.iconColor,
+                size: screenWidth * 0.08,
               ),
             ),
           ),
