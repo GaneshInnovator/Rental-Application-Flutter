@@ -2,6 +2,33 @@ import 'package:flutter/material.dart';
 import '../utils/AppsConstants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+class RecommendedCardList extends StatelessWidget {
+  final List<Map<String, dynamic>> places;
+
+  const RecommendedCardList({Key? key, required this.places}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: places.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.only(
+              right: index == places.length - 1 ? 0 : screenWidth * 0.03,
+            ),
+            child: RecommendedCard(place: places[index]),
+          );
+        },
+      ),
+    );
+  }
+}
+
 class RecommendedCard extends StatelessWidget {
   final Map<String, dynamic> place;
 
@@ -14,7 +41,6 @@ class RecommendedCard extends StatelessWidget {
 
     return Container(
       width: screenWidth * 0.6,
-      margin: EdgeInsets.only(right: screenWidth * 0.03),
       decoration: BoxDecoration(
         color: AppColors.cardBackgroundColor,
         borderRadius: BorderRadius.circular(screenWidth * 0.03),
@@ -34,8 +60,10 @@ class RecommendedCard extends StatelessWidget {
                   height: screenHeight * 0.2,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  placeholder: (context, url) =>
+                  const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) =>
+                  const Icon(Icons.error),
                 ),
               ),
               Padding(
@@ -97,7 +125,8 @@ class RecommendedCard extends StatelessWidget {
             right: screenWidth * 0.03,
             child: Row(
               children: [
-                Icon(Icons.star, color: Colors.redAccent, size: screenWidth * 0.035),
+                Icon(Icons.star,
+                    color: Colors.redAccent, size: screenWidth * 0.035),
                 Text(
                   " ${place['rating']}",
                   style: TextStyle(fontSize: screenWidth * 0.03),
