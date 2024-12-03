@@ -60,7 +60,7 @@ class MostViewedSection extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(width: screenWidth * 0.02),
+                                SizedBox(width: screenWidth * 0.01),
                                 Text(
                                   ' / ${place['day']}',
                                   style: TextStyle(
